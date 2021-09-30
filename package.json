@@ -1,0 +1,80 @@
+{
+  "name": "100ms_edtech_template",
+  "version": "0.1.2",
+  "private": true,
+  "dependencies": {
+    "@100mslive/hms-video": "^0.0.182",
+    "@100mslive/hms-video-react": "^0.3.32",
+    "@100mslive/hms-video-store": "^0.2.40",
+    "@100mslive/hms-virtual-background": "^1.3.2",
+    "@craco/craco": "^6.1.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "logrocket": "^1.0.15",
+    "logrocket-react": "^4.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "react-toastify": "^7.0.4",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build --profile",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "build:style": "NODE_ENV=production npx tailwindcss-cli@latest build ./src/index.css -o tailwind.css"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "react/jsx-curly-brace-presence": [
+        2,
+        {
+          "props": "never"
+        }
+      ],
+      "react/self-closing-comp": [
+        "error",
+        {
+          "component": true,
+          "html": false
+        }
+      ]
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.1.0",
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.36",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.4",
+    "react-scripts": "4.0.3"
+  },
+  "resolutions": {
+    "@100mslive/hms-video-react/postcss": "^7.0.36"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "semi": true,
+    "singleQuote": false,
+    "arrowParens": "avoid"
+  }
+}
