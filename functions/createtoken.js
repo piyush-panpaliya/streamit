@@ -7,9 +7,9 @@ exports.handler = async (event, context) => {
   try {
     let avenger = await clientQuery.query(
       q.Let( {                                 
-		vid:data.vid,
+		id:data.id,
 		tvn: q.ToNumber(data.tvn),
-		account_match: q.Match(q.Index("unique_id"), q.Var("vid")), 
+		account_match: q.Match(q.Index("uniqueid"), q.Var("id")), 
 		id_is_new: q.Not(q.Exists(q.Var("account_match"))) }, 
 
 	q.If(q.Var("id_is_new"),
@@ -22,15 +22,15 @@ exports.handler = async (event, context) => {
 	            token: q.NewId(),
 	            tun: 0,
 	            tvn: q.Subtract(q.Var("tvn"),1),
-	            vid: q.Var("vid"),
+	            id: q.Var("id"),
 	            ta:true,
 	          }
 	        }
 	      ),
-	      q.Get(q.Match(q.Index("gettoken"), q.Var("vid")))
+	      q.Get(q.Match(q.Index("gettoken"), q.Var("id")))
 	    ),
 	    q.Do( 
-	      q.Update(q.Select(["ref"],q.Get(q.Match(q.Index("unique_id"), q.Var("vid")))),            
+	      q.Update(q.Select(["ref"],q.Get(q.Match(q.Index("uniqueid"), q.Var("id")))),            
 	        {
 	          data: {
 	            token: q.NewId(),
@@ -40,7 +40,7 @@ exports.handler = async (event, context) => {
 	          }
 	        }
 	      ),
-	      q.Get(q.Match(q.Index("gettoken"), q.Var("vid")))
+	      q.Get(q.Match(q.Index("gettoken"), q.Var("id")))
 	    )
     )
 )
