@@ -1,0 +1,5 @@
+1 room is created and custom roles are added
+2 user host is registered and the room id is stored with host name
+3 when he start the meeting a link can be generated that can fetch the room id
+4 link is shared and once room id is fetched he she joins the meeting
+5 now once stremers mode is turned on the main features starts working
