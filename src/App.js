@@ -89,7 +89,7 @@ export function EdtechComponent({
           <AppContextProvider roomId={roomId} tokenEndpoint={tokenEndpoint}>
             <Router>
               <Switch>
-                 <Route path="/join">
+                 <Route path="/join/:name?">
                   <CreateRoom />
                  </Route>
                 <Route path="/preview/:roomId/:role?">

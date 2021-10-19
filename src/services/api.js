@@ -19,9 +19,10 @@ export async function apicall( url, data ) {
 
 }
 
-export function datatojson(data) {
+export function datatojson(data,data2) {
 	let obj={};
 	obj.token=data;
+	obj.name=data2;
 	return JSON.stringify(obj);
 
 }

@@ -1,25 +1,24 @@
 import React,{useState} from "react";
-import { useHistory,  } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import {apicall,datatojson} from "../services/api.js"
 
 export const CreateRoom = () => {
   const [roomid,setroomid] = useState(null);
   const [token,settoken] = useState(null);
   const history = useHistory();
+  const { name} = useParams();
 
   const onchange= (event)=>{
     settoken(event.target.value);  
   }
-
+  setroomid(1);
   const submit=async ()=>{
-    
-    const resp = await apicall("/.netlify/functions/getid",datatojson(token));
+    const resp = await apicall("/.netlify/functions/getid",datatojson(token,name));
     console.log(resp);
-    if (resp.isArray()){
-      setroomid(resp[0]);
-      console.log(resp[0]);
+    if (resp === "invalid"){
+      console.log(resp);
       console.log(roomid);
-      history.push(`/preview/${resp[0]}/host`);
+      history.push(`/preview/${resp}/host`);
     }
     else{
       history.push("/invalidToken");
@@ -43,7 +42,9 @@ export const CreateRoom = () => {
         </div>
       </div>
     </div> 
-
+    
   );
 };
 
+//312784656310206663 samay token
+//312877401014010056 piyush token

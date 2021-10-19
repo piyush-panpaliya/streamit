@@ -16,7 +16,7 @@ exports.handler = async (event, context) => {
 	    q.Do(
 	      q.Create(
 	        // Store signup token for new account
-	        q.Collection("tokens"),
+	        q.Collection("token"),
 	        {
 	          data: {
 	            token: q.NewId(),
