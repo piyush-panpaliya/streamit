@@ -12,11 +12,10 @@ import {
   useHMSStore,
 } from "@100mslive/hms-video-react";
 import { Notifications } from "../views/components/notifications/Notifications";
-import { vsource } from "../views/vsources";
 
 export const Conference = () => {
   const history = useHistory();
-  const { roomId, role } = useParams();
+  const { name, role } = useParams();
   const context = useContext(AppContext);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isParticipantListOpen, setIsParticipantListOpen] = useState(false);
@@ -33,14 +32,14 @@ export const Conference = () => {
   const { loginInfo, leave } = context;
 
   useEffect(() => {
-    if (!roomId) {
+    if (!name) {
       history.push(`/`);
     }
     if (!loginInfo.token) {
       // redirect to join if token not present
       if (role)
-        history.push(`/preview/${loginInfo.roomId || roomId || ""}/${role}`);
-      else history.push(`/preview/${loginInfo.roomId || roomId || ""}`);
+        history.push(`/preview/${name || ""}/${role}`);
+      else history.push(`/preview/${name || ""}`);
     }
 
     return () => {
@@ -52,7 +51,7 @@ export const Conference = () => {
   return (
     
     <div className="w-full h-full flex flex-col dark:bg-black">
-    <vsource />
+    
       <div className="h-14 md:h-16">
         <ConferenceHeader onParticipantListOpen={onParticipantListOpen} />
       </div>

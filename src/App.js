@@ -92,15 +92,15 @@ export function EdtechComponent({
                  <Route path="/join/:name?">
                   <CreateRoom />
                  </Route>
-                <Route path="/preview/:roomId/:role?">
+                <Route path="/preview/:name/:role?">
                   <PreviewScreen getUserToken={getUserToken} />
                 </Route>
-                <Route path="/meeting/:roomId/:role?">
+                <Route path="/meeting/:name/:role?">
                   <Conference />
                   
                 </Route>
                 <Route
-                  path="/leave/:roomId/:role?"
+                  path="/leave/:name/:role?"
                   render={({ history, match }) => (
                     <PostLeaveDisplay
                       goToDashboardOnClick={() => {
@@ -115,7 +115,7 @@ export function EdtechComponent({
                     />
                   )}
                 />
-                <Route path="/:roomId/:role?">
+                <Route path="/:name/:role?">
                   <PreviewScreen getUserToken={getUserToken} />
                 </Route>
                 

@@ -166,7 +166,7 @@ export const ConferenceFooter = ({ isChatOpen, toggleChat }) => {
       <VerticalDivider key={5} />
     );
     leftComponents.push(
-      <div class="form-check form-switch mt-1">
+      <div className="form-check form-switch mt-1">
         <input
           className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
           key={6}
@@ -196,7 +196,6 @@ export const ConferenceFooter = ({ isChatOpen, toggleChat }) => {
             <Button
               iconOnly
               variant="no-fill"
-              iconSize="md"
               classes={{ root: "mr-2" }}
               shape="rectangle"
               active={!isLocalAudioEnabled}

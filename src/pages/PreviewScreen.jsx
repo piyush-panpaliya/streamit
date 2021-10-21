@@ -16,8 +16,9 @@ import { Notifications } from "../views/components/notifications/Notifications";
 const PreviewScreen = ({ getUserToken }) => {
   const history = useHistory();
   const context = useContext(AppContext);
-  const { loginInfo, setLoginInfo, setMaxTileCount, tokenEndpoint } = context;
-  const { roomId: urlRoomId, role: userRole } = useParams();
+  const { loginInfo, setLoginInfo, setMaxTileCount, tokenEndpoint} = context;
+  const urlRoomId = loginInfo.roomId;
+  const { role: userRole ,name:urlname } = useParams();
   const location = useLocation();
   const [token, setToken] = useState("");
   const [error, setError] = useState({
@@ -63,8 +64,8 @@ const PreviewScreen = ({ getUserToken }) => {
             roomId: urlRoomId,
             username: name,
           });
-          if (userRole) history.push(`/meeting/${urlRoomId}/${userRole}`);
-          else history.push(`/meeting/${urlRoomId}`);
+          if (userRole) history.push(`/meeting/${urlname}/${userRole}`);
+          else history.push(`/meeting/${urlname}`);
         })
         .catch(error => {
           console.log("Token API Error", error);
@@ -86,8 +87,8 @@ const PreviewScreen = ({ getUserToken }) => {
             username: name,
           });
           // send to meeting room now
-          if (userRole) history.push(`/meeting/${urlRoomId}/${userRole}`);
-          else history.push(`/meeting/${urlRoomId}`);
+          if (userRole) history.push(`/meeting/${urlname}/${userRole}`);
+          else history.push(`/meeting/${urlname}`);
         })
         .catch(error => {
           console.log("Token API Error", error);
@@ -122,7 +123,7 @@ const PreviewScreen = ({ getUserToken }) => {
   };
 
   const leaveRoom = () => {
-    history.push(`/leave/${urlRoomId}/${userRole}`);
+    history.push(`/leave/${urlname}/${userRole}`);
   };
 
   const clearError = () => {
@@ -154,8 +155,8 @@ const PreviewScreen = ({ getUserToken }) => {
   ) {
     history.push(`/`);
   } else if (!isPreview) {
-    if (userRole) history.push(`/preview/${urlRoomId}/${userRole}`);
-    else history.push(`/preview/${urlRoomId}`);
+    if (userRole) history.push(`/preview/${urlname}/${userRole}`);
+    else history.push(`/preview/${urlname}`);
   } else if (skipPreview) {
     join({ audioMuted: true, videoMuted: true, name: "beam" });
   } else {
@@ -166,7 +167,7 @@ const PreviewScreen = ({ getUserToken }) => {
     ) {
       history.push(`/`);
     } else if (!isPreview) {
-      history.push(`/preview/${urlRoomId}`);
+      history.push(`/preview/${urlname}`);
     } else {
       return (
         <div className="h-full">

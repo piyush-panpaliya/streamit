@@ -3,7 +3,14 @@ import {
   useHMSStore,
   useHMSActions,
   selectPeers,
-  selectCameraStreamByPeerID } from "@100mslive/hms-video-react";
+  selectCameraStreamByPeerID,
+  selectIsLocalScreenShared,
+  selectIsSomeoneScreenSharing,
+  selectPeerScreenSharing,
+  selectLocalPeer,
+  VideoTile
+
+   } from "@100mslive/hms-video-react";
 import NewWindow from 'react-new-window';
 
 function Videotile({peer}) {
@@ -11,6 +18,7 @@ function Videotile({peer}) {
   const hmsActions = useHMSActions();
   // get the camera track to render
   const videoTrack = useHMSStore(selectCameraStreamByPeerID(peer.id));
+  //const screentrack = useHMSStore(selectScreenShareByPeerID(presenter.id));
   useEffect(() => {
     if (videoRef.current && videoTrack) {
       if (videoTrack.enabled) {
@@ -26,13 +34,23 @@ function Videotile({peer}) {
 
 export const Vsource = () =>{
   const peer = useHMSStore(selectPeers);
+  const localPeer = useHMSStore(selectLocalPeer);
+  const presenter = useHMSStore(selectPeerScreenSharing);
+  const isSomeoneScreenSharing = useHMSStore(selectIsSomeoneScreenSharing);
   return  <>
   {peer.map(peer => 
-    <NewWindow features="width=320,height=180,toolbar=no,menubar=yes,location=no,resizable=no,scrollbars=no,status=no,left=10,top=10" 
+    <NewWindow key={peer.id} features="width=320,height=180,toolbar=no,menubar=yes,location=no,resizable=no,scrollbars=no,status=no" 
       title={peer.name} >
     <Videotile key={peer.id} peer={peer}/>
     </NewWindow>)
   }
+  {isSomeoneScreenSharing ?( 
+    //  selectIsLocalScreenShared ? 
+    //  null :
+      <NewWindow key={peer.id} features="width=320,height=180,toolbar=no,menubar=yes,location=no,resizable=no,scrollbars=no,status=no" 
+      title="shared screen" >
+      <VideoTile peer={presenter} showScreen={true} objectFit="contain"/>
+        </NewWindow> ) : null}
   </>
  };
 
