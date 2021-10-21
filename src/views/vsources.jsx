@@ -4,10 +4,8 @@ import {
   useHMSActions,
   selectPeers,
   selectCameraStreamByPeerID,
-  selectIsLocalScreenShared,
   selectIsSomeoneScreenSharing,
   selectPeerScreenSharing,
-  selectLocalPeer,
   VideoTile
 
    } from "@100mslive/hms-video-react";
@@ -34,7 +32,7 @@ function Videotile({peer}) {
 
 export const Vsource = () =>{
   const peer = useHMSStore(selectPeers);
-  const localPeer = useHMSStore(selectLocalPeer);
+  //const localPeer = useHMSStore(selectLocalPeer);
   const presenter = useHMSStore(selectPeerScreenSharing);
   const isSomeoneScreenSharing = useHMSStore(selectIsSomeoneScreenSharing);
   return  <>
