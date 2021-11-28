@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
       {
         name: data.name,
         token: data.token,
-        token_match: q.Match(q.Index("tokenvalidate"), q.Var("token")),
+        token_match: q.Match(q.Index("tokenvalidate_roomtoken"), q.Var("token")),
         tg: q.If(q.Exists(q.Var("token_match")), q.Get(q.Var("token_match")), null),
       },
       q.If(
@@ -21,11 +21,11 @@ exports.handler = async (event, context) => {
             q.If(
               q.GTE(q.ToNumber(q.Select(["data", "tvn"], q.Var("tg"))),q.ToNumber(q.Select(["data", "tun"], q.Var("tg")))),
               q.If(
-                q.Equals( q.Select(["data","name"],q.Get(q.Match(q.Index("idToRoomId"),q.Select(["data","id"], q.Var("tg"))))), q.Var("name")),
+                q.Equals( q.Select(["data","wname"],q.Get(q.Match(q.Index("user_match"),q.Select(["data","uid"], q.Var("tg"))))), q.Var("name")),
                 q.Do(
                   q.Update(q.Select("ref", q.Var("tg")), 
                   {data:{tun: q.Add(1, q.ToNumber(q.Select(["data", "tun"], q.Var("tg")))) }}), // Set as used
-                  q.Select(["data","roomid"],q.Get(q.Match(q.Index("idToRoomId"), q.Select(["data","id"], q.Var("tg")))))
+                  q.Select(["data","roomid"],q.Get(q.Match(q.Index("getroomid"), q.Select(["data","uid"], q.Var("tg")))))
                   ),
                 "nameInvalid"
                 ),
