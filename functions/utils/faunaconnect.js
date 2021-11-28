@@ -2,7 +2,7 @@ const faunadb = require('faunadb');
 const q = faunadb.query
 
 const clientQuery = new faunadb.Client({
-  secret: "fnAEVzhBcLAAwCe8YdANqir89YaB0EsYxh7A8zr0",
+  secret: "fnAEXlzXTHAAxRFWbIDV7b90lzrS0dFtdzXd9rG_",
   domain: 'db.eu.fauna.com',
   scheme: 'https',
 });
